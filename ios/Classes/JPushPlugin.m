@@ -445,25 +445,25 @@ static NSMutableArray<FlutterResult>* getRidResults;
 /// 检查当前应用的通知开关是否开启
 - (void)isNotificationEnabled:(FlutterMethodCall*)call result:(FlutterResult)result  {
     JPLog(@"isNotificationEnabled:");
-    [JPUSHService requestNotificationAuthorization:^(JPAuthorizationStatus status) {
-        BOOL isEnabled = NO;
-        if (status == JPAuthorizationStatusAuthorized) {
-            isEnabled = YES;
-        }
-        
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:isEnabled],@"isEnabled", nil];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            result(dict);
-        });
-    }];
+//    [JPUSHService requestNotificationAuthorization:^(JPAuthorizationStatus status) {
+//        BOOL isEnabled = NO;
+//        if (status == JPAuthorizationStatusAuthorized) {
+//            isEnabled = YES;
+//        }
+//
+//        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:isEnabled],@"isEnabled", nil];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            result(dict);
+//        });
+//    }];
    
     
 }
 - (void)openSettingsForNotification {
     JPLog(@"openSettingsForNotification:");
-    [JPUSHService openSettingsForNotification:^(BOOL success) {
-        JPLog(@"openSettingsForNotification: %@",@(success));
-    }];
+//    [JPUSHService openSettingsForNotification:^(BOOL success) {
+//        JPLog(@"openSettingsForNotification: %@",@(success));
+//    }];
 }
 
 
@@ -640,20 +640,20 @@ static NSMutableArray<FlutterResult>* getRidResults;
     completionHandler();
 }
 
-- (void)jpushNotificationAuthorization:(JPAuthorizationStatus)status withInfo:(NSDictionary *)info {
-   JPLog(@"");
-    BOOL isEnabled = NO;
-    if (status == JPAuthorizationStatusAuthorized) {
-        isEnabled = YES;
-    }
-    
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:isEnabled],@"isEnabled", nil];
-    __weak typeof(self) weakself = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        __strong typeof(self) strongself = weakself;
-        [strongself.channel invokeMethod:@"onReceiveNotificationAuthorization" arguments: dict];
-    });
-}
+//- (void)jpushNotificationAuthorization:(JPAuthorizationStatus)status withInfo:(NSDictionary *)info {
+//   JPLog(@"");
+//    BOOL isEnabled = NO;
+//    if (status == JPAuthorizationStatusAuthorized) {
+//        isEnabled = YES;
+//    }
+//
+//    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:isEnabled],@"isEnabled", nil];
+//    __weak typeof(self) weakself = self;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        __strong typeof(self) strongself = weakself;
+//        [strongself.channel invokeMethod:@"onReceiveNotificationAuthorization" arguments: dict];
+//    });
+//}
 - (NSMutableDictionary *)jpushFormatAPNSDic:(NSDictionary *)dic {
     NSMutableDictionary *extras = @{}.mutableCopy;
     for (NSString *key in dic) {
